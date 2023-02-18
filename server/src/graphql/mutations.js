@@ -1,3 +1,7 @@
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
 export const mutations = {
   addDefaultData: async () => {
     if (await prisma.user.findFirst()) {
@@ -39,5 +43,14 @@ export const mutations = {
     }
 
     return true;
+  },
+  createRoom: async (parent, args, context, info) => {
+    const { name } = args;
+    const room = await prisma.room.create({
+      data: {
+        name,
+      },
+    });
+    return room;
   },
 };

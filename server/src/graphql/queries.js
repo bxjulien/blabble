@@ -14,7 +14,11 @@ export const queries = {
     });
   },
   rooms: async () => {
-    return await prisma.room.findMany();
+    return await prisma.room.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
   },
   room: async (parent, args, context, info) => {
     return await prisma.room.findUnique({

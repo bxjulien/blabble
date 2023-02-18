@@ -28,4 +28,5 @@ type Query {
 
 type Mutation {
   addDefaultData: Boolean!
+  createRoom(name: String!): Room!
 }

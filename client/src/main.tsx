@@ -5,6 +5,7 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 import { ApolloProvider } from '@apollo/react-hooks';
 import App from './App';
+import AppContextProvider from './context';
 import ReactDOM from 'react-dom/client';
 import { YogaLink } from '@graphql-yoga/apollo-link';
 import ms_sans_serif from 'react95/dist/fonts/ms_sans_serif.woff2';
@@ -39,12 +40,12 @@ const client = new ApolloClient({
 });
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <>
+  <AppContextProvider>
     <GlobalStyles />
     <ThemeProvider theme={original}>
       <ApolloProvider client={client}>
         <App />
       </ApolloProvider>
     </ThemeProvider>
-  </>
+  </AppContextProvider>
 );
