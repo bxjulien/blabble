@@ -1,0 +1,22 @@
+{
+  "name": "blabble-server",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node dist/index.js",
+    "prisma-generate": "prisma generate --schema=./src/prisma/schema.prisma"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.10.1",
+    "graphql": "^16.6.0",
+    "graphql-yoga": "^3.6.0",
+    "prisma": "^4.10.1",
+    "sqlite3": "^5.1.4"
+  }
+}

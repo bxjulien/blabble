@@ -1,0 +1,31 @@
+type User {
+  id: ID!
+  name: String!
+}
+
+type Room {
+  id: ID!
+  name: String!
+  users: [User!]!
+  messages: [Message!]!
+  createdAt: String!
+}
+
+type Message {
+  id: ID!
+  text: String!
+  user: User!
+  room: Room!
+  createdAt: String!
+}
+
+type Query {
+  users: [User!]!
+  user: User!
+  rooms: [Room!]!
+  room(id: ID!): Room!
+}
+
+type Mutation {
+  addDefaultData: Boolean!
+}
