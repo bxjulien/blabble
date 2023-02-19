@@ -12,6 +12,27 @@ export const mutations = {
     });
     return room;
   },
+  deleteRoom: async (parent, args, context, info) => {
+    const { id } = args;
+
+    const room = await prisma.room.findFirst({
+      where: {
+        id: +id,
+      },
+    });
+
+    if (!room) {
+      throw new Error('Room not found');
+    }
+
+    const deletedRoom = await prisma.room.delete({
+      where: {
+        id: +id,
+      },
+    });
+
+    return deletedRoom;
+  },
   login: async (parent, args, context, info) => {
     const { name, pinCode } = args;
 

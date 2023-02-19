@@ -1,4 +1,4 @@
-import { Join } from '../components/home/join/Join';
+import { Login } from '../components/home/join/Login';
 import { RoomCreation } from '../components/home/room_creation/RoomCreation';
 import { Rooms } from '../components/home/rooms/Rooms';
 import { useAppContext } from '../context';
@@ -16,7 +16,7 @@ export const Home = () => {
       >
         Blabble
       </h1>
-      {user ? <RoomCreation /> : <Join />}
+      {user ? <RoomCreation /> : <Login />}
       <Rooms />
     </div>
   );

@@ -33,7 +33,7 @@ export const UsernameForm = ({ setUsername }: UsernameFormProps) => {
       <TextInput
         ref={inputRef}
         name='username'
-        placeholder='Join as...'
+        placeholder='Username...'
         fullWidth
         onChange={(e) => {
           const isValueOverThan15Characters = e.target.value.length > 15;

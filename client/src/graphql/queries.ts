@@ -20,6 +20,14 @@ export const CREATE_ROOM = gql`
   }
 `;
 
+export const DELETE_ROOM = gql`
+  mutation deleteRoom($id: ID!) {
+    deleteRoom(id: $id) {
+      id
+    }
+  }
+`;
+
 export const ROOMS = gql`
   query rooms {
     rooms {

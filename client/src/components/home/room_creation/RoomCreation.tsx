@@ -42,6 +42,7 @@ export const RoomCreation = () => {
       className='room_creation'
       onSubmit={handleCreateRoom}
       style={{
+        height: '3rem',
         display: 'flex',
         gap: '.5rem',
       }}

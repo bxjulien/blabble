@@ -35,6 +35,7 @@ export const Rooms = () => {
   );
 
   const { loading, error, data } = useQuery(ROOMS, {
+    fetchPolicy: 'network-only',
     onCompleted: (data: RoomsResult) => {
       setRooms(data.rooms);
     },
@@ -144,7 +145,7 @@ export const Rooms = () => {
                       textAlign: 'right',
                     }}
                   >
-                    {new Date(+room.createdAt).toLocaleString()}
+                    {new Date(+room.createdAt).toLocaleString().split(' ')[0]}
                   </TableDataCell>
                 </TableRow>
               ))}

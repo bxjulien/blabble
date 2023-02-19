@@ -1,5 +1,3 @@
-import './Join.css';
-
 import { Window, WindowHeader } from 'react95';
 
 import { LOGIN } from '../../../graphql/queries';
@@ -9,7 +7,7 @@ import { useAppContext } from '../../../context';
 import { useMutation } from '@apollo/react-hooks';
 import { useState } from 'react';
 
-export const Join = () => {
+export const Login = () => {
   const { setUser } = useAppContext();
 
   const [username, setUsername] = useState<string>('');
