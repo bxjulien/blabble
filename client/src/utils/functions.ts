@@ -1,4 +1,4 @@
-import Room from '../interfaces/Room.interface';
+import Room from '../types/Room.interface';
 
 export const sortRooms = (
   rooms: Room[],

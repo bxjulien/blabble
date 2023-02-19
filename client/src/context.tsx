@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 
-import Room from './interfaces/Room.interface';
-import User from './interfaces/User.interface';
+import Room from './types/Room.interface';
+import User from './types/User.interface';
 
 const AppContext = createContext<UseAppContextType | null>(null);
 

@@ -9,10 +9,11 @@ import {
   WindowHeader,
 } from 'react95';
 
-import { ROOMS } from '../../graphql/queries';
-import Room from '../../interfaces/Room.interface';
-import { sortRooms } from '../../utils/functions';
-import { useAppContext } from '../../context';
+import { ROOMS } from '../../../../graphql/queries';
+import Room from '../../../../types/Room.interface';
+import { sortRooms } from '../../../../utils/functions';
+import { useAppContext } from '../../../../context';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { useState } from 'react';
 
@@ -22,6 +23,8 @@ interface RoomsResult {
 
 export const Rooms = () => {
   const { rooms, setRooms } = useAppContext();
+
+  const navigate = useNavigate();
 
   const [sortOrderName, setSortOrderName] = useState<'asc' | 'desc'>('asc');
   const [sortOrderMessages, setSortOrderMessages] = useState<'asc' | 'desc'>(
@@ -118,6 +121,7 @@ export const Rooms = () => {
                     borderBottom: '1px solid rgb(223, 223, 223)',
                     cursor: 'pointer',
                   }}
+                  onClick={() => navigate(`/room/${room.id}`)}
                 >
                   <TableDataCell
                     style={{
