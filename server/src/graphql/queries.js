@@ -23,7 +23,7 @@ export const queries = {
   room: async (parent, args, context, info) => {
     return await prisma.room.findUnique({
       where: {
-        id: args.id,
+        id: +args.id,
       },
       include: {
         users: true,

@@ -19,3 +19,57 @@ export const ROOMS = gql`
     }
   }
 `;
+
+export const ROOM = gql`
+  query room($id: ID!) {
+    room(id: $id) {
+      id
+      name
+      createdAt
+      users {
+        id
+        name
+      }
+      messages {
+        id
+        text
+        user {
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const JOIN_ROOM = gql`
+  mutation joinRoom($id: ID!) {
+    joinRoom(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
+export const MESSAGES = gql`
+  query GetMessages {
+    messages {
+      id
+      text
+      user {
+        name
+      }
+    }
+  }
+`;
+
+export const MESSAGE_CREATED = gql`
+  subscription {
+    messageCreated {
+      id
+      text
+      user {
+        name
+      }
+    }
+  }
+`;

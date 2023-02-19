@@ -3,9 +3,9 @@ import './RoomCreation.css';
 import { Button, TextInput } from 'react95';
 import { FormEvent, useRef } from 'react';
 
-import { CREATE_ROOM } from '../../../../graphql/queries';
-import Room from '../../../../types/Room.interface';
-import { useAppContext } from '../../../../context';
+import { CREATE_ROOM } from '../../../graphql/queries';
+import Room from '../../../types/Room.interface';
+import { useAppContext } from '../../../context';
 import { useMutation } from '@apollo/react-hooks';
 
 interface CreateRoomResult {
