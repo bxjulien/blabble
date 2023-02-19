@@ -1,5 +1,3 @@
-import './RoomCreation.css';
-
 import { Button, TextInput } from 'react95';
 import { FormEvent, useRef } from 'react';
 
@@ -40,14 +38,26 @@ export const RoomCreation = () => {
   };
 
   return (
-    <form className='room_creation' onSubmit={handleCreateRoom}>
+    <form
+      className='room_creation'
+      onSubmit={handleCreateRoom}
+      style={{
+        display: 'flex',
+        gap: '.5rem',
+      }}
+    >
       <TextInput
         ref={inputRef}
         name='name'
         placeholder='Create a room...'
         fullWidth
       />
-      <Button primary type='submit' disabled={loading}>
+      <Button
+        primary
+        type='submit'
+        disabled={loading}
+        style={{ height: '100%' }}
+      >
         Create
       </Button>
     </form>

@@ -8,7 +8,14 @@ export const Home = () => {
 
   return (
     <div className='home_view'>
-      <h1 className='title'>Blabble</h1>
+      <h1
+        style={{
+          fontSize: '1.5rem',
+          textAlign: 'center',
+        }}
+      >
+        Blabble
+      </h1>
       {user ? <RoomCreation /> : <Join />}
       <Rooms />
     </div>

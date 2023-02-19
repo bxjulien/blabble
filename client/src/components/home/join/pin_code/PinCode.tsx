@@ -1,18 +1,22 @@
 import { Button, GroupBox, TextInput } from 'react95';
-import { useEffect, useRef } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 
 interface PinCodeFormProps {
   username: string;
   setUsername: (username: string) => void;
-  pin: string;
-  setPin: (pin: string) => void;
+  pinCode: string;
+  setPinCode: (pin: string) => void;
+  handleLogin: () => void;
+  loading: boolean;
 }
 
 export const PinCodeForm = ({
   username,
   setUsername,
-  pin,
-  setPin,
+  pinCode,
+  setPinCode,
+  handleLogin,
+  loading,
 }: PinCodeFormProps) => {
   const firstInputRef = useRef<HTMLInputElement>(null);
   const secondInputRef = useRef<HTMLInputElement>(null);
@@ -37,7 +41,7 @@ export const PinCodeForm = ({
       currentRef.current.focus();
     }
 
-    setPin(
+    setPinCode(
       `${firstInputRef.current?.value || ''}${
         secondInputRef.current?.value || ''
       }${thirdInputRef.current?.value || ''}${
@@ -53,6 +57,10 @@ export const PinCodeForm = ({
         display: 'flex',
         flexDirection: 'column',
         gap: '.5rem',
+      }}
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleLogin();
       }}
     >
       <GroupBox label='Pin Code'>
@@ -102,7 +110,7 @@ export const PinCodeForm = ({
           gap: '.5rem',
         }}
       >
-        <Button primary type='submit' disabled={pin.length < 4}>
+        <Button primary type='submit' disabled={pinCode.length < 4 || loading}>
           Connect as '{username}'
         </Button>
         <Button

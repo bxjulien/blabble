@@ -1,5 +1,15 @@
 import gql from 'graphql-tag';
 
+export const LOGIN = gql`
+  mutation login($name: String!, $pinCode: String!) {
+    login(name: $name, pinCode: $pinCode) {
+      id
+      name
+      pinCode
+    }
+  }
+`;
+
 export const CREATE_ROOM = gql`
   mutation createRoom($name: String!) {
     createRoom(name: $name) {

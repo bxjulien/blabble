@@ -3,47 +3,6 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export const mutations = {
-  addDefaultData: async () => {
-    if (await prisma.user.findFirst()) {
-      return 'Data already exists';
-    } else {
-      await prisma.user.createMany({
-        data: [
-          {
-            name: 'John',
-          },
-          {
-            name: 'Jane',
-          },
-          {
-            name: 'Jack',
-          },
-        ],
-        skipDuplicates: true,
-      });
-    }
-
-    if (await prisma.room.findFirst()) {
-      return 'Data already exists';
-    } else {
-      await prisma.room.createMany({
-        data: [
-          {
-            name: 'General',
-          },
-          {
-            name: 'Random',
-          },
-          {
-            name: 'Programming',
-          },
-        ],
-        skipDuplicates: true,
-      });
-    }
-
-    return true;
-  },
   createRoom: async (parent, args, context, info) => {
     const { name } = args;
     const room = await prisma.room.create({
@@ -52,5 +11,30 @@ export const mutations = {
       },
     });
     return room;
+  },
+  login: async (parent, args, context, info) => {
+    const { name, pinCode } = args;
+
+    let user = await prisma.$queryRaw`
+      SELECT * FROM User 
+      WHERE lower(name) = lower(${name}) 
+      LIMIT 1
+    `;
+
+    if (user && user.length) {
+      user = user[0];
+      if (user.pinCode === pinCode) {
+        return user;
+      }
+      throw new Error('Incorrect pinCode');
+    } else {
+      const newUser = await prisma.user.create({
+        data: {
+          name,
+          pinCode,
+        },
+      });
+      return newUser;
+    }
   },
 };

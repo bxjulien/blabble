@@ -1,6 +1,7 @@
 type User {
   id: ID!
   name: String!
+  pinCode: String!
 }
 
 type Room {
@@ -27,6 +28,6 @@ type Query {
 }
 
 type Mutation {
-  addDefaultData: Boolean!
   createRoom(name: String!): Room!
+  login(name: String!, pinCode: String!): User!
 }
