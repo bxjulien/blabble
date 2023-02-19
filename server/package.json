@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node dist/index.js",
-    "prisma-generate": "prisma generate --schema=./src/prisma/schema.prisma"
+    "prisma-generate": "prisma generate --schema=./src/prisma/schema.prisma",
+    "prisma-migrate": "prisma migrate dev --schema=./src/prisma/schema.prisma"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
