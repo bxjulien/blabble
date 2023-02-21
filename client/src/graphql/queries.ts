@@ -54,6 +54,7 @@ export const ROOM = gql`
       messages {
         id
         text
+        createdAt
         user {
           name
         }
@@ -105,6 +106,7 @@ export const MESSAGE_CREATED = gql`
     messageCreated(roomId: $roomId) {
       id
       text
+      createdAt
       user {
         id
         name

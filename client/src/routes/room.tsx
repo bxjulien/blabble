@@ -1,4 +1,4 @@
-import { Button, Window, WindowHeader } from 'react95';
+import { Avatar, Button, Window, WindowHeader } from 'react95';
 import { DELETE_ROOM, ROOM } from '../graphql/queries';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -81,7 +81,9 @@ export const Room = () => {
 
       <h2>user list</h2>
       {data?.room.users.map((user: any) => (
-        <p key={user.id}>{user.name}</p>
+        <div key={user.id}>
+          <Avatar size={50} src={`https://loremflickr.com/500/500`} />
+        </div>
       ))}
 
       {id && (
