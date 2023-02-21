@@ -11,8 +11,8 @@ export const LOGIN = gql`
 `;
 
 export const CREATE_ROOM = gql`
-  mutation createRoom($name: String!) {
-    createRoom(name: $name) {
+  mutation createRoom($name: String!, $userId: ID!) {
+    createRoom(name: $name, userId: $userId) {
       id
       name
       createdAt
@@ -34,6 +34,9 @@ export const ROOMS = gql`
       id
       name
       createdAt
+      messages {
+        id
+      }
     }
   }
 `;
@@ -80,12 +83,30 @@ export const MESSAGES = gql`
   }
 `;
 
-export const MESSAGE_CREATED = gql`
-  subscription {
-    messageCreated {
+export const POST_MESSAGE = gql`
+  mutation PostMessage($text: String!, $userId: ID!, $roomId: ID!) {
+    postMessage(text: $text, userId: $userId, roomId: $roomId) {
       id
       text
       user {
+        id
+        name
+      }
+      room {
+        id
+        name
+      }
+    }
+  }
+`;
+
+export const MESSAGE_CREATED = gql`
+  subscription messageCreated($roomId: ID!) {
+    messageCreated(roomId: $roomId) {
+      id
+      text
+      user {
+        id
         name
       }
     }

@@ -18,17 +18,35 @@ export const queries = {
       orderBy: {
         createdAt: 'desc',
       },
+      include: {
+        users: true,
+        messages: {
+          include: {
+            user: true,
+          },
+        },
+      },
     });
   },
   room: async (parent, args, context, info) => {
-    return await prisma.room.findUnique({
+    const room = await prisma.room.findUnique({
       where: {
         id: +args.id,
       },
       include: {
         users: true,
-        messages: true,
+        messages: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
+
+    if (!room) {
+      throw new Error('Room not found');
+    }
+
+    return room;
   },
 };

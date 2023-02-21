@@ -1,5 +1,6 @@
 import { mutations } from './mutations.js';
 import { queries } from './queries.js';
+import { subscriptions } from './subscriptions.js';
 
 const resolvers = {
   Query: {
@@ -7,6 +8,9 @@ const resolvers = {
   },
   Mutation: {
     ...mutations,
+  },
+  Subscription: {
+    ...subscriptions,
   },
 };
 

@@ -11,7 +11,7 @@ interface CreateRoomResult {
 }
 
 export const RoomCreation = () => {
-  const { rooms, setRooms } = useAppContext();
+  const { user, rooms, setRooms } = useAppContext();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [createRoom, { loading, error, data }] = useMutation(CREATE_ROOM, {
@@ -33,6 +33,7 @@ export const RoomCreation = () => {
     createRoom({
       variables: {
         name: formData.get('name') as string,
+        userId: user?.id,
       },
     });
   };

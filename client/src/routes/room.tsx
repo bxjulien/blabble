@@ -80,15 +80,21 @@ export const Room = () => {
       </WindowHeader>
 
       <h2>user list</h2>
+      {data?.room.users.map((user: any) => (
+        <p key={user.id}>{user.name}</p>
+      ))}
 
-      <Messages
-        messages={data?.room.messages}
-        loading={loading}
-        error={error}
-      />
+      {id && (
+        <Messages
+          roomId={id}
+          messages={data?.room.messages}
+          loading={loading}
+          error={error}
+        />
+      )}
 
       {!user && <Login />}
-      {user && <Chat />}
+      {user && id && <Chat roomId={id} />}
     </Window>
   );
 };
