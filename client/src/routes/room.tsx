@@ -1,12 +1,12 @@
-import { Avatar, Button, Window, WindowHeader } from 'react95';
-import { DELETE_ROOM, ROOM } from '../graphql/queries';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Avatar, Button, Window, WindowContent, WindowHeader } from "react95";
+import { DELETE_ROOM, ROOM } from "../graphql/queries";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { Chat } from '../components/room/chat/Chat';
-import { Login } from '../components/home/join/Login';
-import { Messages } from '../components/room/messages/Messages';
-import { useAppContext } from '../context';
+import { Chat } from "../components/room/chat/Chat";
+import { Login } from "../components/home/join/Login";
+import { Messages } from "../components/room/messages/Messages";
+import { useAppContext } from "../context";
 
 export const Room = () => {
   let { id } = useParams<{ id: string }>();
@@ -29,10 +29,10 @@ export const Room = () => {
         id,
       },
       onCompleted: () => {
-        navigate('/');
+        navigate("/");
       },
       onError: (error) => {
-        console.error('DELETE_ROOM onError', error);
+        console.error("DELETE_ROOM onError", error);
       },
     });
   };
@@ -40,8 +40,8 @@ export const Room = () => {
   return (
     <Window
       style={{
-        width: '100%',
-        height: '100%',
+        width: "100%",
+        height: "100%",
       }}
     >
       <WindowHeader>
@@ -49,54 +49,63 @@ export const Room = () => {
         <Button
           onClick={handleDeleteRoom}
           style={{
-            position: 'absolute',
-            top: '10px',
-            right: '80px',
-            width: '40px',
+            position: "absolute",
+            top: "10px",
+            right: "80px",
+            width: "40px",
           }}
           disabled={loadingDelete}
         >
           <img
-            src='/src/assets/trash.png'
-            alt='delete'
+            src="/src/assets/trash.png"
+            alt="delete"
             style={{
-              width: '40px',
-              height: '40px',
+              width: "40px",
+              height: "40px",
             }}
           />
         </Button>
         <Button
           onClick={() => {
-            navigate('/');
+            navigate("/");
           }}
           style={{
-            position: 'absolute',
-            top: '10px',
-            right: '10px',
+            position: "absolute",
+            top: "10px",
+            right: "10px",
           }}
         >
           <strong>X</strong>
         </Button>
       </WindowHeader>
 
-      <h2>user list</h2>
-      {data?.room.users.map((user: any) => (
-        <div key={user.id}>
-          <Avatar size={50} src={`https://loremflickr.com/500/500`} />
+      <WindowContent
+        style={{
+          display: "grid",
+          gridRowGap: "10px",
+        }}
+      >
+        <div>
+          <h2>user list</h2>
+          {data?.room.users.map((user: any) => (
+            <div key={user.id}>
+              <Avatar size={50} src={`https://loremflickr.com/500/500`} />
+            </div>
+          ))}
         </div>
-      ))}
 
-      {id && (
-        <Messages
-          roomId={id}
-          messages={data?.room.messages}
-          loading={loading}
-          error={error}
-        />
-      )}
+        {id && (
+          <Messages
+            roomId={id}
+            messages={data?.room.messages}
+            loading={loading}
+            error={error}
+          />
+        )}
 
-      {!user && <Login />}
-      {user && id && <Chat roomId={id} />}
+        {!user && <Login />}
+        {user && id && <Chat roomId={id} />}
+      </WindowContent>
     </Window>
   );
 };
