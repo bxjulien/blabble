@@ -15,7 +15,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className='App'>
-      <Frame style={{ padding: '0.5rem', width: '100%', height: '100%', display: 'grid', gridTemplateRows: 'calc(90% -10px) 6%', rowGap: '10px' }}>
+      <Frame style={{ padding: '0.5rem', width: '100%', height: '100%', display: 'grid', gridTemplateRows: '90% auto' }}>
         <RouterProvider router={router} />
         <Navbar />
       </Frame>

@@ -97,7 +97,7 @@ export const Room = () => {
         {id && (
           <Messages
             roomId={id}
-            messages={data?.room.messages}
+            messagesAtLoad={data?.room.messages}
             loading={loading}
             error={error}
           />
