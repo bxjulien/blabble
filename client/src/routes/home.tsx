@@ -1,11 +1,22 @@
-import { RoomCreation } from '../components/views/home/room_creation/RoomCreation';
-import { Rooms } from '../components/views/home/rooms/Rooms';
+import { Login } from '../components/home/join/Login';
+import { RoomCreation } from '../components/home/room_creation/RoomCreation';
+import { Rooms } from '../components/home/rooms/Rooms';
+import { useAppContext } from '../context';
 
 export const Home = () => {
+  const { user } = useAppContext();
+
   return (
     <div className='home_view'>
-      <h1 className='title'>Blabble</h1>
-      <RoomCreation />
+      <h1
+        style={{
+          fontSize: '1.5rem',
+          textAlign: 'center',
+        }}
+      >
+        Blabble
+      </h1>
+      {user && <RoomCreation />}
       <Rooms />
     </div>
   );

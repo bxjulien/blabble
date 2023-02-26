@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { Frame } from 'react95';
 import { Home } from './routes/home';
+import { Navbar } from './components/navbar/Navbar';
 import { Room } from './routes/room';
 
 const router = createBrowserRouter([
@@ -14,8 +15,18 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className='App'>
-      <Frame style={{ padding: '0.5rem', width: '100%', height: '100%' }}>
+      <Frame
+        style={{
+          padding: '0.5rem',
+          width: '100%',
+          height: '100%',
+          display: 'grid',
+          gridTemplateRows: 'auto 3rem',
+          gridGap: '10px',
+        }}
+      >
         <RouterProvider router={router} />
+        <Navbar />
       </Frame>
     </div>
   );

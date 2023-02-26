@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState } from 'react';
 
 import Room from './types/Room.interface';
 import User from './types/User.interface';
+import { useEffect } from 'react';
 
 const AppContext = createContext<UseAppContextType | null>(null);
 
@@ -22,6 +23,21 @@ export default function AppContextProvider({
 }: AppContextProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [rooms, setRooms] = useState<Room[] | null>(null);
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      setUser(JSON.parse(user));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [user]);
 
   const value = {
     user,

@@ -9,10 +9,10 @@ import {
   WindowHeader,
 } from 'react95';
 
-import { ROOMS } from '../../../../graphql/queries';
-import Room from '../../../../types/Room.interface';
-import { sortRooms } from '../../../../utils/functions';
-import { useAppContext } from '../../../../context';
+import { ROOMS } from '../../../graphql/queries';
+import Room from '../../../types/Room.interface';
+import { sortRooms } from '../../../utils/functions';
+import { useAppContext } from '../../../context';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { useState } from 'react';
@@ -35,6 +35,7 @@ export const Rooms = () => {
   );
 
   const { loading, error, data } = useQuery(ROOMS, {
+    fetchPolicy: 'network-only',
     onCompleted: (data: RoomsResult) => {
       setRooms(data.rooms);
     },
@@ -63,6 +64,7 @@ export const Rooms = () => {
       <div className='rooms'>
         <Window
           style={{
+            height: '100%',
             width: '100%',
             minHeight: '400px',
           }}
@@ -143,7 +145,7 @@ export const Rooms = () => {
                       textAlign: 'right',
                     }}
                   >
-                    {new Date(+room.createdAt).toLocaleString()}
+                    {new Date(+room.createdAt).toLocaleString().split(' ')[0]}
                   </TableDataCell>
                 </TableRow>
               ))}
