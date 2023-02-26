@@ -31,8 +31,7 @@ export const Messages = ({
     },
   });
 
-  console.log("Messages", messagesAtLoad);
-  const [messages, setMessages] = useState<Message[]>(messagesAtLoad);
+  const [messages, setMessages] = useState<Message[]>(messagesAtLoad || []);
 
   if (loading) return <p>Loading messages...</p>;
   else if (error) return <p>Error :(</p>;
@@ -44,17 +43,25 @@ interface MessageListProps {
 }
 
 const MessageList = ({ messages }: MessageListProps) => {
-  if (!messages || !messages.length) return <p>No messages</p>;
-  else
-    return (
-      <ScrollView
-        style={{
-          height: "500px",
-          width: "100%",
-          padding: "10px",
-        }}
-      >
-        {messages.map((message: any) => (
+  return (
+    <ScrollView
+      style={{
+        height: "500px",
+        width: "100%",
+        padding: "10px",
+      }}
+    >
+      {!messages || !messages.length ? (
+        <div
+          style={{
+            textAlign: "center",
+            color: "gray",
+          }}
+        >
+          No messages yet
+        </div>
+      ) : (
+        messages.map((message: any) => (
           <GroupBox
             key={message.id}
             label={
@@ -75,7 +82,8 @@ const MessageList = ({ messages }: MessageListProps) => {
           >
             {message.text}
           </GroupBox>
-        ))}
-      </ScrollView>
-    );
+        ))
+      )}
+    </ScrollView>
+  );
 };
