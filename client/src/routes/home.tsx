@@ -16,7 +16,7 @@ export const Home = () => {
       >
         Blabble
       </h1>
-      {user ? <RoomCreation /> : <Login />}
+      {user && <RoomCreation />}
       <Rooms />
     </div>
   );

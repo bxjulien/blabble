@@ -1,10 +1,10 @@
-import { GroupBox, ScrollView } from "react95";
-import { MESSAGES, MESSAGE_CREATED } from "../../../graphql/queries";
-import { useQuery, useSubscription } from "@apollo/react-hooks";
+import { GroupBox, ScrollView } from 'react95';
+import { useEffect, useState } from 'react';
 
-import Message from "../../../types/Message.interface";
-import { howLongAgo } from "../../../utils/functions";
-import { useEffect, useState } from "react";
+import { MESSAGE_CREATED } from '../../../graphql/queries';
+import Message from '../../../types/Message.interface';
+import { howLongAgo } from '../../../utils/functions';
+import { useSubscription } from '@apollo/react-hooks';
 
 interface MessagesProps {
   roomId: string;
@@ -19,6 +19,12 @@ export const Messages = ({
   loading,
   error,
 }: MessagesProps) => {
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  useEffect(() => {
+    if (messagesAtLoad) setMessages(messagesAtLoad);
+  }, [messagesAtLoad]);
+
   useSubscription(MESSAGE_CREATED, {
     variables: { roomId },
     onData: (data) => {
@@ -27,11 +33,9 @@ export const Messages = ({
       setMessages(newMessages);
     },
     onError: (error) => {
-      console.error("MESSAGE_CREATED onError", error);
+      console.error('MESSAGE_CREATED onError', error);
     },
   });
-
-  const [messages, setMessages] = useState<Message[]>(messagesAtLoad || []);
 
   if (loading) return <p>Loading messages...</p>;
   else if (error) return <p>Error :(</p>;
@@ -46,16 +50,17 @@ const MessageList = ({ messages }: MessageListProps) => {
   return (
     <ScrollView
       style={{
-        height: "500px",
-        width: "100%",
-        padding: "10px",
+        height: '100%',
+        maxHeight: '60vh',
+        width: '100%',
+        padding: '10px',
       }}
     >
       {!messages || !messages.length ? (
         <div
           style={{
-            textAlign: "center",
-            color: "gray",
+            textAlign: 'center',
+            color: 'gray',
           }}
         >
           No messages yet
@@ -66,10 +71,10 @@ const MessageList = ({ messages }: MessageListProps) => {
             key={message.id}
             label={
               <div>
-                {message.user.name} -{" "}
+                {message.user.name} -{' '}
                 <small
                   style={{
-                    color: "gray",
+                    color: 'gray',
                   }}
                 >
                   {howLongAgo(+message.createdAt)}
@@ -77,7 +82,7 @@ const MessageList = ({ messages }: MessageListProps) => {
               </div>
             }
             style={{
-              margin: "1.5rem 0",
+              margin: '1.5rem 0',
             }}
           >
             {message.text}
