@@ -1,11 +1,9 @@
-import './RoomCreation.css';
-
 import { Button, TextInput } from 'react95';
 import { FormEvent, useRef } from 'react';
 
-import { CREATE_ROOM } from '../../../../graphql/queries';
-import Room from '../../../../types/Room.interface';
-import { useAppContext } from '../../../../context';
+import { CREATE_ROOM } from '../../../graphql/queries';
+import Room from '../../../types/Room.interface';
+import { useAppContext } from '../../../context';
 import { useMutation } from '@apollo/react-hooks';
 
 interface CreateRoomResult {
@@ -13,7 +11,7 @@ interface CreateRoomResult {
 }
 
 export const RoomCreation = () => {
-  const { rooms, setRooms } = useAppContext();
+  const { user, rooms, setRooms } = useAppContext();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [createRoom, { loading, error, data }] = useMutation(CREATE_ROOM, {
@@ -35,19 +33,33 @@ export const RoomCreation = () => {
     createRoom({
       variables: {
         name: formData.get('name') as string,
+        userId: user?.id,
       },
     });
   };
 
   return (
-    <form className='room_creation' onSubmit={handleCreateRoom}>
+    <form
+      className='room_creation'
+      onSubmit={handleCreateRoom}
+      style={{
+        height: '3rem',
+        display: 'flex',
+        gap: '.5rem',
+      }}
+    >
       <TextInput
         ref={inputRef}
         name='name'
         placeholder='Create a room...'
         fullWidth
       />
-      <Button primary type='submit' disabled={loading}>
+      <Button
+        primary
+        type='submit'
+        disabled={loading}
+        style={{ height: '100%' }}
+      >
         Create
       </Button>
     </form>

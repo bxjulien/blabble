@@ -1,13 +1,14 @@
 type User {
   id: ID!
   name: String!
+  pinCode: String!
 }
 
 type Room {
   id: ID!
   name: String!
-  users: [User!]!
-  messages: [Message!]!
+  users: [User!]
+  messages: [Message!]
   createdAt: String!
 }
 
@@ -27,6 +28,12 @@ type Query {
 }
 
 type Mutation {
-  addDefaultData: Boolean!
-  createRoom(name: String!): Room!
+  createRoom(name: String!, userId: ID!): Room!
+  deleteRoom(id: ID!): Room!
+  login(name: String!, pinCode: String!): User!
+  postMessage(text: String!, userId: ID!, roomId: ID!): Message!
+}
+
+type Subscription {
+  messageCreated(roomId: ID!): Message!
 }
