@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Chat } from '../components/room/chat/Chat';
-import { Login } from '../components/home/join/Login';
+import { Login } from '../components/login/Login';
 import { Messages } from '../components/room/messages/Messages';
 import { useAppContext } from '../context';
 

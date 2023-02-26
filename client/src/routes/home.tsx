@@ -1,4 +1,4 @@
-import { Login } from '../components/home/join/Login';
+import { Login } from '../components/login/Login';
 import { RoomCreation } from '../components/home/room_creation/RoomCreation';
 import { Rooms } from '../components/home/rooms/Rooms';
 import { useAppContext } from '../context';

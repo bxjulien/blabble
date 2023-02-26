@@ -9,11 +9,14 @@ export const Navbar = () => {
       }}
     >
       <Button
+        fullWidth
         style={{
           height: '100%',
         }}
-        fullWidth
-        active
+        active={
+          window.location.pathname === '/' ||
+          window.location.pathname.includes('/room')
+        }
       >
         <img
           src='/src/assets/world.png'
@@ -29,6 +32,7 @@ export const Navbar = () => {
         style={{
           height: '100%',
         }}
+        active={window.location.pathname === '/settings'}
       >
         <img
           src='/src/assets/settings.png'

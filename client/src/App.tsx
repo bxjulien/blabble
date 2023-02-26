@@ -6,10 +6,12 @@ import { Frame } from 'react95';
 import { Home } from './routes/home';
 import { Navbar } from './components/navbar/Navbar';
 import { Room } from './routes/room';
+import { Settings } from './routes/settings';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
   { path: '/room/:id', element: <Room /> },
+  { path: '/settings', element: <Settings /> },
 ]);
 
 function App() {
