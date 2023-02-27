@@ -8,6 +8,7 @@ interface PinCodeFormProps {
   setPinCode: (pin: string) => void;
   handleLogin: () => void;
   loading: boolean;
+  error: any;
 }
 
 export const PinCodeForm = ({
@@ -17,6 +18,7 @@ export const PinCodeForm = ({
   setPinCode,
   handleLogin,
   loading,
+  error,
 }: PinCodeFormProps) => {
   const firstInputRef = useRef<HTMLInputElement>(null);
   const secondInputRef = useRef<HTMLInputElement>(null);
@@ -26,6 +28,24 @@ export const PinCodeForm = ({
   useEffect(() => {
     firstInputRef.current?.focus();
   }, []);
+
+  useEffect(() => {
+    if (error) {
+      if (
+        firstInputRef.current &&
+        secondInputRef.current &&
+        thirdInputRef.current &&
+        fourthInputRef.current
+      ) {
+        console.error('PinCodeForm error', error);
+        firstInputRef.current.value = '';
+        secondInputRef.current.value = '';
+        thirdInputRef.current.value = '';
+        fourthInputRef.current.value = '';
+        firstInputRef.current.focus();
+      }
+    }
+  }, [error]);
 
   const handleInputChange = (currentRef: any, nextRef: any, value: any) => {
     const isValueANumberBetween0And9 = value >= 0 && value <= 9;

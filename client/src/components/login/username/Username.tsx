@@ -1,5 +1,5 @@
 import { Button, TextInput } from 'react95';
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 
 import { useState } from 'react';
 
@@ -11,6 +11,10 @@ export const UsernameForm = ({ setUsername }: UsernameFormProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   const handleUsernameSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
