@@ -1,9 +1,9 @@
 import { Window, WindowHeader } from 'react95';
 
-import { LOGIN } from '../../../graphql/queries';
+import { LOGIN } from '../../graphql/queries';
 import { PinCodeForm } from './pin_code/PinCode';
 import { UsernameForm } from './username/Username';
-import { useAppContext } from '../../../context';
+import { useAppContext } from '../../context';
 import { useMutation } from '@apollo/react-hooks';
 import { useState } from 'react';
 
@@ -49,6 +49,7 @@ export const Login = () => {
           setPinCode={setPinCode}
           handleLogin={handleLogin}
           loading={loading}
+          error={error}
         />
       )}
     </Window>
