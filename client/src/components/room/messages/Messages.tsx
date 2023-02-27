@@ -51,7 +51,7 @@ const MessageList = ({ messages }: MessageListProps) => {
     <ScrollView
       style={{
         height: '100%',
-        maxHeight: '60vh',
+        maxHeight: '72vh',
         width: '100%',
         padding: '10px',
       }}

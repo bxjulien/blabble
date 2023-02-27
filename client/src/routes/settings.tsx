@@ -6,10 +6,5 @@ export const Settings = () => {
   const { user } = useAppContext();
 
   if (!user) return <Login />;
-  return (
-    <div className='setting_view'>
-      <h1>{user.name}</h1>
-      <Logout />
-    </div>
-  );
+  return <Logout />
 };

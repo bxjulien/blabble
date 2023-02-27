@@ -1,12 +1,11 @@
-import { Avatar, Button, Window, WindowContent, WindowHeader } from 'react95';
-import { DELETE_ROOM, ROOM } from '../graphql/queries';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Button, Window, WindowContent, WindowHeader } from "react95";
+import { DELETE_ROOM, ROOM } from "../graphql/queries";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { Chat } from '../components/room/chat/Chat';
-import { Login } from '../components/login/Login';
-import { Messages } from '../components/room/messages/Messages';
-import { useAppContext } from '../context';
+import { Chat } from "../components/room/chat/Chat";
+import { Messages } from "../components/room/messages/Messages";
+import { useAppContext } from "../context";
 
 export const Room = () => {
   let { id } = useParams<{ id: string }>();
@@ -29,10 +28,10 @@ export const Room = () => {
         id,
       },
       onCompleted: () => {
-        navigate('/');
+        navigate("/");
       },
       onError: (error) => {
-        console.error('DELETE_ROOM onError', error);
+        console.error("DELETE_ROOM onError", error);
       },
     });
   };
@@ -40,20 +39,20 @@ export const Room = () => {
   return (
     <Window
       style={{
-        width: '100%',
-        height: '100%',
+        width: "100%",
+        height: "100%",
       }}
     >
       <WindowHeader>
         <h1>{data?.room.name}</h1>
         <Button
           onClick={() => {
-            navigate('/');
+            navigate("/");
           }}
           style={{
-            position: 'absolute',
-            top: '10px',
-            right: '10px',
+            position: "absolute",
+            top: "10px",
+            right: "10px",
           }}
         >
           <strong>X</strong>
@@ -62,9 +61,8 @@ export const Room = () => {
 
       <WindowContent
         style={{
-          height: '100%',
-          display: 'grid',
-          gridRowGap: '10px',
+          display: "grid",
+          gridRowGap: "10px",
         }}
       >
         {id && (
@@ -76,9 +74,22 @@ export const Room = () => {
           />
         )}
 
-        {!user && <Login />}
+        {!user && <GoToSettings />}
         {user && id && <Chat roomId={id} />}
       </WindowContent>
     </Window>
+  );
+};
+
+const GoToSettings = () => {
+  const navigate = useNavigate();
+  return (
+    <Button
+      onClick={() => {
+        navigate("/settings");
+      }}
+    >
+      Connect to interact
+    </Button>
   );
 };

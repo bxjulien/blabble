@@ -1,14 +1,22 @@
-import Room from '../types/Room.interface';
+import Room from "../types/Room.interface";
 
 export const sortRooms = (
   rooms: Room[],
-  key: keyof Room,
-  order: 'asc' | 'desc'
+  key: keyof Room | "messages.length",
+  order: "asc" | "desc"
 ) => {
   return [...rooms].sort((a, b) => {
-    const aVal = a[key];
-    const bVal = b[key];
-    const direction = order === 'asc' ? 1 : -1;
+    let aVal, bVal;
+
+    if (key === "messages.length") {
+      aVal = a.messages.length;
+      bVal = b.messages.length;
+    } else {
+      aVal = a[key];
+      bVal = b[key];
+    }
+
+    const direction = order === "asc" ? 1 : -1;
 
     if (aVal < bVal) return -1 * direction;
     if (aVal > bVal) return 1 * direction;
@@ -29,12 +37,12 @@ export const howLongAgo = (createdAt: number) => {
   const durationInDays = Math.floor(durationInHours / 24);
 
   if (durationInMinutes < 1) {
-    return 'Just now';
+    return "Just now";
   } else if (durationInMinutes < 60) {
-    return `${durationInMinutes} minute${durationInMinutes > 1 ? 's' : ''}`;
+    return `${durationInMinutes} minute${durationInMinutes > 1 ? "s" : ""}`;
   } else if (durationInHours < 24) {
-    return `${durationInHours} hour${durationInHours > 1 ? 's' : ''}`;
+    return `${durationInHours} hour${durationInHours > 1 ? "s" : ""}`;
   } else {
-    return `${durationInDays} day${durationInDays > 1 ? 's' : ''}`;
+    return `${durationInDays} day${durationInDays > 1 ? "s" : ""}`;
   }
 };
