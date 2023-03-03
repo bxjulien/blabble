@@ -1,12 +1,11 @@
-import { createPubSub, createSchema, createYoga } from 'graphql-yoga';
+import { createSchema, createYoga } from "graphql-yoga";
+import { pubsub } from "./graphql/config/pubsub.js";
 
-import { createServer } from 'http';
-import { readFileSync } from 'fs';
-import resolvers from './graphql/resolvers.js';
+import { createServer } from "http";
+import { readFileSync } from "fs";
+import resolvers from "./graphql/resolvers.js";
 
-const typeDefs = readFileSync('src/graphql/schema.graphql', 'utf8');
-
-const pubsub = createPubSub();
+const typeDefs = readFileSync("src/graphql/schema.graphql", "utf8");
 
 const schema = createSchema({ typeDefs, resolvers });
 
@@ -22,5 +21,5 @@ const yoga = createYoga({
 const server = createServer(yoga);
 
 server.listen(4000, async () => {
-  console.log('Server is running on http://localhost:4000');
+  console.log("Server is running on http://localhost:4000");
 });
